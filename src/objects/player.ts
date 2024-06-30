@@ -4,6 +4,7 @@ import {
   Mesh,
   MeshBasicMaterial,
   PlaneGeometry,
+  Quaternion,
   RepeatWrapping,
   Texture,
   TextureLoader,
@@ -15,7 +16,7 @@ const idle = (texture: Texture, time: number) => {
   const th = 4;
   const tv = 3;
   const total = th * tv;
-  const tile = Math.ceil((time / 200) % total);
+  const tile = Math.ceil((time / 160) % total);
   const x = Math.ceil(tile / th);
   const y = tile % tv || tv;
 
@@ -24,20 +25,31 @@ const idle = (texture: Texture, time: number) => {
   texture.offset.y = (1 / tv) * y;
 };
 
+const quaternion = new Quaternion();
+const yAxis = new Vector3(0, 1, 0);
+
 export const createPlayer = () => {
   const texture = new TextureLoader().load("Idle.png");
+
+  texture.anisotropy = 4;
+  texture.wrapS = RepeatWrapping;
+  texture.wrapT = RepeatWrapping;
+  texture.center.x -= 0.01;
+  texture.center.y -= 0.02;
+
   const material = new MeshBasicMaterial({
     side: FrontSide,
     map: texture,
-    color: 0xfb601d,
+    color: 0xe9724f,
     transparent: true,
+    precision: "highp",
   });
 
-  texture.wrapS = RepeatWrapping;
-  texture.wrapT = RepeatWrapping;
-
   const group = new Group();
-  const geometry = new PlaneGeometry(2, 2);
+  const geometry = new PlaneGeometry(1.8, 1.8);
+
+  geometry.rotateZ(Math.PI);
+
   const mesh = new Mesh(geometry, material);
   const arrowHelper = createArrowHelper();
 
@@ -46,10 +58,14 @@ export const createPlayer = () => {
   return {
     group,
     render(direction: Vector3, time: number) {
-      arrowHelper.render(direction);
-      group.position.add(direction);
+      if (direction.length()) {
+        group.position.add(direction);
+        arrowHelper.render(direction);
+        quaternion.setFromUnitVectors(yAxis, direction.clone().normalize());
+      }
 
-      // group.rotation.z = new Vector3(0, -1, 0).angleTo(direction);
+      // mesh.rotation.setFromQuaternion(quaternion);
+      mesh.quaternion.slerp(quaternion, 0.1);
 
       idle(texture, time);
     },
