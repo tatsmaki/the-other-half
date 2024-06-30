@@ -14,11 +14,14 @@ export const GameScreen = () => {
   const player = createPlayer();
   const camera = createCamera();
 
-  player.group.add(camera);
   scene.add(player.group);
 
-  const animate = () => {
-    player.render(keyboardControl.direction);
+  const animate = (time: number) => {
+    const direction = keyboardControl.direction;
+
+    player.render(direction, time);
+    camera.position.add(direction);
+
     renderer.render(scene, camera);
   };
 
