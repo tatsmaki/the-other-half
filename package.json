@@ -10,11 +10,19 @@
   },
   "devDependencies": {
     "@types/three": "^0.165.0",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "eslint": "^8.57.0",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "vite-plugin-eslint": "^1.8.1"
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.0.12",
     "three": "^0.165.0"
+  },
+  "engines": {
+    "npm": ">=10.2.0",
+    "node": ">=20.11.0"
   }
 }
