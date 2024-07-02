@@ -4,8 +4,10 @@ class MouseControl {
   y = 0;
 
   constructor() {
-    document.onmousedown = () => {
+    document.onmousedown = (event: MouseEvent) => {
       this.isActive = true;
+      this.x = event.clientX;
+      this.y = event.clientY;
     };
 
     document.onmousemove = (event: MouseEvent) => {

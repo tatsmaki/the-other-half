@@ -14,7 +14,7 @@ let position = new Vector3();
 export const createFire = () => {
   const group = new Group();
   const mesh = new Mesh(new SphereGeometry(0.1), new MeshBasicMaterial());
-  const arrowHelper = createArrowHelper(0.3);
+  const arrowHelper = createArrowHelper(0.3, 0xffffff);
 
   group.add(mesh);
   group.add(arrowHelper.mesh);
@@ -28,6 +28,7 @@ export const createFire = () => {
         const projection = new Vector3(dx, dy, 1);
 
         position = projection.unproject(camera);
+        position.sub(camera.position);
         position.z = 0;
       } else {
         position.x = 0;
