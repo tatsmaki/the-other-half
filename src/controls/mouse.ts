@@ -20,6 +20,10 @@ class MouseControl {
     document.onmouseup = () => {
       this.isActive = false;
     };
+
+    document.oncontextmenu = () => {
+      this.isActive = false;
+    };
   }
 }
 
