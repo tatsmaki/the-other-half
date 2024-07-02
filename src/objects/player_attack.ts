@@ -1,4 +1,5 @@
 import {
+  Group,
   Mesh,
   MeshBasicMaterial,
   PerspectiveCamera,
@@ -6,14 +7,20 @@ import {
   Vector3,
 } from "three";
 import { mouseControl } from "../controls/mouse";
+import { createArrowHelper } from "./arrow_helper";
 
 let position = new Vector3();
 
 export const createFire = () => {
+  const group = new Group();
   const mesh = new Mesh(new SphereGeometry(0.1), new MeshBasicMaterial());
+  const arrowHelper = createArrowHelper(0.3);
+
+  group.add(mesh);
+  group.add(arrowHelper.mesh);
 
   return {
-    mesh,
+    group,
     update(camera: PerspectiveCamera) {
       if (mouseControl.isActive) {
         const dx = (mouseControl.x / window.innerWidth) * 2 - 1;
@@ -27,7 +34,8 @@ export const createFire = () => {
         position.y = 0;
       }
 
-      mesh.position.lerp(position, 0.1);
+      group.position.lerp(position, 0.1);
+      arrowHelper.render(position.clone().sub(group.position));
     },
   };
 };

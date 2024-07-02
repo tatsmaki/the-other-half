@@ -3,7 +3,7 @@ import { createPlayer } from "../../objects/player";
 import { createScene } from "../../objects/scene";
 import { createCamera } from "../../objects/camera";
 import { createRenderer } from "./renderer";
-import { createFire } from "../../objects/fire";
+import { createFire } from "../../objects/player_attack";
 
 export const GameScreen = () => {
   const app = document.getElementById("app")!;
@@ -16,7 +16,7 @@ export const GameScreen = () => {
   const fire = createFire();
   const camera = createCamera();
 
-  player.group.add(fire.mesh);
+  player.group.add(fire.group);
   scene.add(player.group);
 
   const animate = (time: number) => {
