@@ -1,10 +1,10 @@
 import { Vector3 } from "three";
 
 class KeyboardControl {
-  w = false;
-  a = false;
-  s = false;
-  d = false;
+  private w = false;
+  private a = false;
+  private s = false;
+  private d = false;
 
   constructor() {
     document.onkeydown = (event) => {
@@ -60,7 +60,7 @@ class KeyboardControl {
     const x = -this.a + +this.d;
     const y = +this.w - +this.s;
 
-    return new Vector3(x, y, 0).multiplyScalar(0.02);
+    return new Vector3(x, y, 0);
   }
 }
 

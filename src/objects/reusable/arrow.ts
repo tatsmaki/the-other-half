@@ -6,7 +6,7 @@ export const createArrow = (length = 0.5, color = 0xe9724f) => {
   return {
     mesh,
     render(direction: Vector3) {
-      mesh.setDirection(direction.clone().normalize());
+      mesh.setDirection(direction);
     },
   };
 };

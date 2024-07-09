@@ -1,7 +1,9 @@
+import { Vector3 } from "three";
+
 class MouseControl {
   isActive = false;
-  x = 0;
-  y = 0;
+  private x = 0;
+  private y = 0;
 
   constructor() {
     document.onmousedown = (event: MouseEvent) => {
@@ -24,6 +26,13 @@ class MouseControl {
     document.oncontextmenu = () => {
       this.isActive = false;
     };
+  }
+
+  get projection() {
+    const dx = (this.x / window.innerWidth) * 2 - 1;
+    const dy = (this.y / window.innerHeight) * -2 + 1;
+
+    return new Vector3(dx, dy, 1);
   }
 }
 

@@ -3,8 +3,7 @@ import { mouseControl } from "../../controls/mouse";
 import { createArrow } from "../reusable/arrow";
 import { camera } from "../global/camera";
 
-let position = new Vector3();
-
+const position = new Vector3();
 // const maxRadius = 0.6;
 const group = new Group();
 const mesh = new Mesh(new SphereGeometry(0.1), new MeshBasicMaterial());
@@ -14,11 +13,9 @@ group.add(mesh, arrow.mesh);
 
 const render = () => {
   if (mouseControl.isActive) {
-    const dx = (mouseControl.x / window.innerWidth) * 2 - 1;
-    const dy = (mouseControl.y / window.innerHeight) * -2 + 1;
-    const projection = new Vector3(dx, dy, 1);
+    const projection = mouseControl.projection;
 
-    position = projection.unproject(camera);
+    position.copy(projection.unproject(camera));
     // position.clampLength(0, maxRadius);
     position.sub(camera.position);
     position.z = 0;
@@ -28,7 +25,7 @@ const render = () => {
   }
 
   group.position.lerp(position, 0.1);
-  arrow.render(position.clone().sub(group.position));
+  arrow.render(position.clone().sub(group.position).normalize());
 };
 
 export const attack = { group, render };
