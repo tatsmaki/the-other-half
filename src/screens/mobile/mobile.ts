@@ -1,6 +1,6 @@
 import classes from "./mobile.module.css";
-import icon from "./mobile_rotate.svg?raw";
-import { Joystick } from "../joystick";
+import icon from "/rotate_device.svg?raw";
+// import { Joystick } from "../joystick";
 
 export const Mobile = () => {
   const app = document.getElementById("app")!;
@@ -16,7 +16,7 @@ export const Mobile = () => {
   if (screen.orientation.type.includes("portrait")) {
     app.append(overlay);
   } else {
-    Joystick();
+    // Joystick();
   }
 
   screen.orientation.onchange = () => {

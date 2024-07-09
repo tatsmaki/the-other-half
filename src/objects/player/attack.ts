@@ -5,6 +5,7 @@ import { camera } from "../global/camera";
 
 let position = new Vector3();
 
+// const maxRadius = 0.6;
 const group = new Group();
 const mesh = new Mesh(new SphereGeometry(0.1), new MeshBasicMaterial());
 const arrow = createArrow(0.3, 0xffffff);
@@ -18,9 +19,8 @@ const render = () => {
     const projection = new Vector3(dx, dy, 1);
 
     position = projection.unproject(camera);
-    // position.clampLength(0, 1);
+    // position.clampLength(0, maxRadius);
     position.sub(camera.position);
-
     position.z = 0;
   } else {
     position.x = 0;

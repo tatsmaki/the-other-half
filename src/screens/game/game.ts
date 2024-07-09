@@ -2,12 +2,13 @@ import { player } from "../../objects/player";
 import { scene } from "../../objects/global/scene";
 import { camera } from "../../objects/global/camera";
 import { renderer } from "../../objects/global/renderer";
-// import { Mobile } from "../mobile";
+import { Mobile } from "../mobile";
 import { collision } from "../../objects/global/collision";
 
 export const GameScreen = () => {
   const app = document.getElementById("app")!;
 
+  Mobile();
   app.append(renderer.domElement);
 
   scene.add(player.group, collision.group);
