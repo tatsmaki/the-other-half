@@ -1,0 +1,27 @@
+/* .overlay {
+  position: fixed;
+} */
+
+.joystick {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 20vw;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+
+  border: 2px var(--colors-black-100) solid;
+  opacity: 0.1;
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 200ms;
+  width: 24px;
+  height: 24px;
+  background-color: var(--colors-black-100);
+  border-radius: 50%;
+}

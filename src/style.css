@@ -1,11 +1,18 @@
+@font-face {
+  font-family: "Cardo";
+  src: url(/public/Cardo-Regular.ttf) format("truetype");
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Cardo", serif;
   line-height: 1.5;
   font-weight: 400;
 
+  --colors-black-100: #fafafa;
+  --colors-black-500: #242424;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--colors-black-100);
+  background-color: var(--colors-black-500);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,18 +20,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
+  height: 100%;
 }
 
 #app {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --colors-black-100: #242424;
+    --colors-black-500: #fafafa;
   }
 }

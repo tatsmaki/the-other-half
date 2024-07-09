@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+    <rect width="256" height="256" fill="none"/>
+    <g fill="none" stroke="currentColor" stroke-linecap="butt" stroke-width="5">
+        <path d="M200,216H80a16,16,0,0,1-16-16V104" />
+        <path d="M56,40H176a16,16,0,0,1,16,16v96" />
+        <polyline points="176 192 200 216 176 240" />
+        <polyline points="80 16 56 40 80 64" />
+    </g>
+</svg>

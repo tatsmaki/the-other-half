@@ -1,0 +1,30 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--colors-black-500);
+  color: var(--colors-black-100);
+
+  svg {
+    width: 50%;
+    aspect-ratio: 1/1;
+    min-width: 128px;
+    max-width: 256px;
+  }
+}
+
+.help {
+  margin: 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+@media (width > 768px) {
+  .help {
+    font-size: 30px;
+  }
+}
