@@ -1,31 +1,19 @@
-import { keyboardControl } from "../../controls/keyboard";
-import { createPlayer } from "../../objects/player";
-import { createScene } from "../../objects/scene";
-import { createCamera } from "../../objects/camera";
-import { createRenderer } from "./renderer";
-import { createFire } from "../../objects/player_attack";
+import { player } from "../../objects/player";
+import { scene } from "../../objects/global/scene";
+import { camera } from "../../objects/global/camera";
+import { renderer } from "../../objects/global/renderer";
+// import { Mobile } from "../mobile";
+import { collision } from "../../objects/global/collision";
 
 export const GameScreen = () => {
   const app = document.getElementById("app")!;
-  const renderer = createRenderer();
 
   app.append(renderer.domElement);
 
-  const scene = createScene();
-  const player = createPlayer();
-  const fire = createFire();
-  const camera = createCamera();
-
-  player.group.add(fire.group);
-  scene.add(player.group);
+  scene.add(player.group, collision.group);
 
   const animate = (time: number) => {
-    const direction = keyboardControl.direction;
-
-    player.render(direction, time);
-    camera.position.add(direction);
-    fire.update(camera);
-
+    player.render(time);
     renderer.render(scene, camera);
   };
 

@@ -1,0 +1,30 @@
+import { RepeatWrapping, TextureLoader } from "three";
+import { RenderSpriteArgs, renderSprite, resetSprite } from "../../utils/sprite";
+import { material } from "./material";
+
+const textureLoader = new TextureLoader();
+
+const idle = textureLoader.load("Idle.png");
+
+idle.wrapS = RepeatWrapping;
+idle.wrapT = RepeatWrapping;
+idle.center.x -= 0.007;
+idle.center.y -= 0.022;
+
+const run = textureLoader.load("Run.png");
+
+run.wrapS = RepeatWrapping;
+run.wrapT = RepeatWrapping;
+run.center.x -= 0.005;
+run.center.y -= 0.015;
+
+const render = ({ texture, time, th, tv }: RenderSpriteArgs) => {
+  if (material.map !== texture) {
+    material.map = texture;
+    resetSprite(time);
+  }
+
+  renderSprite({ texture, time, th, tv });
+};
+
+export const sprite = { idle, run, render };

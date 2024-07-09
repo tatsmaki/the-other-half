@@ -1,6 +1,6 @@
 import { Texture } from "three";
 
-type RenderSpriteArgs = {
+export type RenderSpriteArgs = {
   texture: Texture;
   time: number;
   th: number;
