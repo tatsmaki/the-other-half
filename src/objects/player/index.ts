@@ -15,7 +15,6 @@ const geometry = new PlaneGeometry(1.8, 1.8);
 const mesh = new Mesh(geometry, material);
 const arrow = createArrow();
 
-geometry.rotateZ(Math.PI);
 mesh.position.z = 0.1;
 group.add(mesh, arrow.mesh, attack.group);
 

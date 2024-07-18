@@ -30,10 +30,10 @@ export const renderSprite = ({ texture, time, th, tv }: RenderSpriteArgs) => {
     resetSprite(time);
   }
 
-  const x = th - (tile % th || th) + 1;
-  const y = tv - Math.ceil(tile / th) + 1;
+  const x = tile % th || th;
+  const y = Math.ceil(tile / th);
 
   texture.repeat.set(1 / th, 1 / tv);
-  texture.offset.x = 1 - (1 / th) * x;
+  texture.offset.x = (1 / th) * -x;
   texture.offset.y = (1 / tv) * y;
 };

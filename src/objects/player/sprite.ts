@@ -4,19 +4,19 @@ import { material } from "./material";
 
 const textureLoader = new TextureLoader();
 
-const idle = textureLoader.load("Idle.png");
+const idle = textureLoader.load("/idle.png");
 
 idle.wrapS = RepeatWrapping;
 idle.wrapT = RepeatWrapping;
-idle.center.x -= 0.007;
-idle.center.y -= 0.022;
+idle.center.x = 0.007;
+idle.center.y = 0.022;
 
-const run = textureLoader.load("Run.png");
+const run = textureLoader.load("/run.png");
 
 run.wrapS = RepeatWrapping;
 run.wrapT = RepeatWrapping;
-run.center.x -= 0.005;
-run.center.y -= 0.015;
+run.center.x = 0.005;
+run.center.y = 0.015;
 
 const render = ({ texture, time, th, tv }: RenderSpriteArgs) => {
   if (material.map !== texture) {
