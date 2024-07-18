@@ -1,8 +1,8 @@
-import { BoxGeometry, Group, Mesh, MeshBasicMaterial } from "three";
+import { BoxGeometry, Group, Mesh, MeshStandardMaterial } from "three";
 
 const group = new Group();
 
-const box = new Mesh(new BoxGeometry(0.5, 0.5, 0.5), new MeshBasicMaterial());
+const box = new Mesh(new BoxGeometry(0.5, 0.5, 0.5), new MeshStandardMaterial());
 box.position.x = 1;
 box.position.y = 1;
 
