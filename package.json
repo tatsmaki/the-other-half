@@ -18,7 +18,6 @@
     "vite-plugin-eslint": "^1.8.1"
   },
   "dependencies": {
-    "@vercel/speed-insights": "^1.0.12",
     "three": "^0.165.0"
   },
   "engines": {
