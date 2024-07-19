@@ -1,5 +1,5 @@
 import classes from "./mobile.module.css";
-import icon from "rotate_device.svg?raw";
+import icon from "/rotate_device.svg?raw";
 // import { Joystick } from "../joystick";
 
 export const Mobile = () => {
