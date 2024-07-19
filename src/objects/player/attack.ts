@@ -10,6 +10,7 @@ import {
 import { mouseControl } from "../../controls/mouse";
 import { createArrow } from "../reusable/arrow";
 import { camera } from "../global/camera";
+import { pointLight } from "./point_light";
 
 const position = new Vector3();
 // const maxRadius = 0.6;
@@ -24,9 +25,8 @@ const material = new MeshBasicMaterial({
 });
 const mesh = new Mesh(geometry, material);
 const arrow = createArrow(0.3, 0xffffff);
-// 0xc88253
 
-group.add(mesh, arrow.mesh);
+group.add(mesh, arrow.mesh, pointLight);
 
 const render = () => {
   if (mouseControl.isActive) {
@@ -41,7 +41,11 @@ const render = () => {
     position.y = 0;
   }
 
-  group.position.lerp(position, 0.1);
+  const offset = group.position.lerp(position, 0.1);
+  const offsetLength = offset.length();
+
+  pointLight.intensity = offsetLength / 3;
+  group.visible = offsetLength > 0.01;
   arrow.render(position.clone().sub(group.position).normalize());
 };
 

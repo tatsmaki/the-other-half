@@ -6,6 +6,7 @@ import { material } from "./material";
 import { sprite } from "./sprite";
 import { keyboardControl } from "../../controls/keyboard";
 import { attack } from "./attack";
+import { directionalLight } from "../global/directional_light";
 
 const quaternion = new Quaternion();
 const yAxis = new Vector3(0, 1, 0);
@@ -15,8 +16,12 @@ const geometry = new PlaneGeometry(1.8, 1.8);
 const mesh = new Mesh(geometry, material);
 const arrow = createArrow();
 
-mesh.position.z = 0.1;
-group.add(mesh, arrow.mesh, attack.group);
+mesh.position.z = 0.03;
+mesh.castShadow = true;
+
+group.add(mesh, arrow.mesh, attack.group, directionalLight);
+directionalLight.target = group;
+directionalLight.lookAt(group.position);
 
 const render = (time: number) => {
   const direction = keyboardControl.direction.normalize();

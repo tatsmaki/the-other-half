@@ -15,6 +15,7 @@ module.exports = {
       "error",
       { checksVoidReturn: { attributes: false } },
     ],
-    "@typescript-eslint/no-unsafe-assignment": 0,
+    "@typescript-eslint/no-unsafe-assignment": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
   },
 };
