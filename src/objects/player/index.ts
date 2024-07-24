@@ -7,10 +7,11 @@ import { sprite } from "./sprite";
 import { keyboardControl } from "../../controls/keyboard";
 import { attack } from "./attack";
 import { directionalLight } from "../global/directional_light";
+import { footstep } from "./footstep";
 
 const quaternion = new Quaternion();
 const yAxis = new Vector3(0, 1, 0);
-const runSpeed = 0.02;
+const runSpeed = 0.015;
 const group = new Group();
 const geometry = new PlaneGeometry(1.8, 1.8);
 const mesh = new Mesh(geometry, material);
@@ -39,6 +40,8 @@ const render = (time: number) => {
       camera.position.add(velocity);
       arrow.render(direction);
     }
+
+    footstep.render(group.position, mesh.rotation);
   } else {
     sprite.render({ texture: sprite.idle, time, th: 4, tv: 3 });
   }

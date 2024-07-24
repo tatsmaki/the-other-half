@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/lodash.throttle": "^4.1.9",
     "@types/three": "^0.165.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
@@ -18,6 +19,7 @@
     "vite-plugin-eslint": "^1.8.1"
   },
   "dependencies": {
+    "lodash.throttle": "^4.1.1",
     "three": "^0.165.0"
   },
   "engines": {

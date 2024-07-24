@@ -1,5 +1,6 @@
 import { AxesHelper, Mesh, MeshLambertMaterial, PlaneGeometry, Scene } from "three";
 import { hemisphereLight } from "./hemisphere_light";
+import { footstep } from "../player/footstep";
 
 export const scene = new Scene();
 const helper = new AxesHelper(1);
@@ -10,4 +11,4 @@ const ground = new Mesh(new PlaneGeometry(4, 4), new MeshLambertMaterial({ color
 
 ground.receiveShadow = true;
 
-scene.add(helper, ground, hemisphereLight);
+scene.add(helper, ground, hemisphereLight, footstep.group);

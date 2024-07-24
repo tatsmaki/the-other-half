@@ -1,22 +1,14 @@
-import {
-  FrontSide,
-  Group,
-  Mesh,
-  MeshBasicMaterial,
-  PlaneGeometry,
-  TextureLoader,
-  Vector3,
-} from "three";
+import { FrontSide, Group, Mesh, MeshBasicMaterial, PlaneGeometry, Vector3 } from "three";
 import { mouseControl } from "../../controls/mouse";
 import { createArrow } from "../reusable/arrow";
 import { camera } from "../global/camera";
 import { pointLight } from "./point_light";
+import { textureLoader } from "../global/texture_loader";
 
 const position = new Vector3();
 // const maxRadius = 0.6;
 const group = new Group();
 const geometry = new PlaneGeometry(0.3, 0.3);
-const textureLoader = new TextureLoader();
 const flame = textureLoader.load("flame_ball.png");
 const material = new MeshBasicMaterial({
   side: FrontSide,

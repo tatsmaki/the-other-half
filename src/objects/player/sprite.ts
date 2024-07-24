@@ -1,8 +1,7 @@
-import { RepeatWrapping, TextureLoader } from "three";
+import { RepeatWrapping } from "three";
 import { RenderSpriteArgs, renderSprite, resetSprite } from "../../utils/sprite";
 import { material } from "./material";
-
-const textureLoader = new TextureLoader();
+import { textureLoader } from "../global/texture_loader";
 
 const idle = textureLoader.load("idle.png");
 
