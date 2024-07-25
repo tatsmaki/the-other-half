@@ -16,17 +16,17 @@ const step = new Mesh(geometry);
 
 let isRight = false;
 
-const render = throttle((position: Vector3, rotation: Euler) => {
+const createStep = throttle((position: Vector3, rotation: Euler) => {
   const newStep = step.clone();
 
   newStep.rotation.z = rotation.z;
   newStep.position.copy({ ...position, z: 0.01 });
 
   if (isRight) {
-    newStep.material = right;
+    newStep.material = right.clone();
     newStep.translateX(0.05);
   } else {
-    newStep.material = left;
+    newStep.material = left.clone();
     newStep.translateX(-0.05);
   }
 
@@ -38,5 +38,18 @@ const render = throttle((position: Vector3, rotation: Euler) => {
     group.remove(newStep);
   }, 1000);
 }, 200);
+
+const render = (direction: Vector3, position: Vector3, rotation: Euler) => {
+  group.children.forEach((step) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore mesh material types
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    step.material.opacity -= 0.01;
+  });
+
+  if (direction.length()) {
+    createStep(position, rotation);
+  }
+};
 
 export const footstep = { group, render };

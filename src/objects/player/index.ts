@@ -40,11 +40,11 @@ const render = (time: number) => {
       camera.position.add(velocity);
       arrow.render(direction);
     }
-
-    footstep.render(group.position, mesh.rotation);
   } else {
     sprite.render({ texture: sprite.idle, time, th: 4, tv: 3 });
   }
+
+  footstep.render(direction, group.position, mesh.rotation);
 
   mesh.quaternion.slerp(quaternion, 0.1);
   attack.render();
