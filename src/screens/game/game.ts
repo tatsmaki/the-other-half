@@ -4,16 +4,21 @@ import { camera } from "../../objects/global/camera";
 import { renderer } from "../../objects/global/renderer";
 import { Mobile } from "../mobile";
 import { collision } from "../../objects/global/collision";
+import { fps } from "../../utils/fps";
+import classes from "./game.module.css";
 
 export const GameScreen = () => {
   const app = document.getElementById("app")!;
+  const counter = document.createElement("div");
 
   Mobile();
-  app.append(renderer.domElement);
+  counter.className = classes.fps;
+  app.append(renderer.domElement, counter);
 
   scene.add(player.group, collision.group);
 
   const animate = (time: number) => {
+    fps(time, counter);
     player.render(time);
     renderer.render(scene, camera);
   };
