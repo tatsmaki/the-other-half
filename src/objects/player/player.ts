@@ -52,7 +52,7 @@ const render = (time: number, delta: number) => {
   });
 
   mesh.quaternion.slerp(quaternion, 0.1);
-  flame.render(time);
+  flame.render(time, delta);
 };
 
 export const player = { group, render };

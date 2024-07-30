@@ -13,7 +13,10 @@ import throttle from "lodash.throttle";
 import { getRandomNumber } from "../../utils/random";
 
 const endColor = new Color(0xe9724f);
-// const zAxis = new Vector3(0, 0, 1);
+const fadeOutSpeed = 1.1;
+const betweenParticles = 30;
+const scaleDown = 0.3;
+const translateSpeed = 0.5;
 const geometry = new PlaneGeometry(0.7, 0.7);
 const material = new MeshBasicMaterial({
   side: FrontSide,
@@ -23,11 +26,24 @@ const material = new MeshBasicMaterial({
 const particle = new Mesh(geometry, material);
 const group = new Group<never, typeof particle>();
 
-const createParticle = throttle((time: number, position: Vector3, rotation: Euler) => {
+type CreateParticleArgs = {
+  time: number;
+  position: Vector3;
+  rotation: Euler;
+  distance: number;
+};
+
+const createParticle = throttle(({ time, position, rotation, distance }: CreateParticleArgs) => {
   const newParticle = particle.clone(true);
 
   newParticle.rotation.z = rotation.z;
   newParticle.position.copy({ ...position, z: -0 });
+
+  if (distance < 0.1) {
+    newParticle.scale.x = scaleDown;
+    newParticle.scale.y = scaleDown;
+  }
+
   newParticle.material = material.clone();
   newParticle.material.needsUpdate = true;
 
@@ -41,41 +57,47 @@ const createParticle = throttle((time: number, position: Vector3, rotation: Eule
   group.add(newParticle);
 
   sprite.render(time, map);
-}, 30);
+}, betweenParticles);
 
 type RenderParticlesArgs = {
   time: number;
+  delta: number;
   canCreateParticle: boolean;
   position: Vector3;
   rotation: Euler;
+  distance: number;
 };
 
-const render = ({ time, canCreateParticle, position, rotation }: RenderParticlesArgs) => {
+const render = ({
+  time,
+  delta,
+  canCreateParticle,
+  position,
+  rotation,
+  distance,
+}: RenderParticlesArgs) => {
   group.children.forEach((particle) => {
-    particle.scale.x -= 0.01;
-    particle.scale.y -= 0.01;
+    const scale = Math.max(0, particle.scale.x - fadeOutSpeed * delta);
 
-    if (particle.scale.x <= 0.2) {
+    particle.scale.x = scale;
+    particle.scale.y = scale;
+
+    if (particle.scale.x <= 0) {
       group.remove(particle);
-
-      return;
     }
 
-    particle.translateX(particle.userData.translateX * 0.003);
-    particle.translateY(particle.userData.translateY * 0.003);
-    particle.position.z += 0.001;
+    particle.translateX(particle.userData.translateX * translateSpeed * delta);
+    particle.translateY(particle.userData.translateY * translateSpeed * delta);
 
     const material = particle.material;
-
-    material.color.lerp(endColor, 0.05);
-
     const map = material.map!;
 
+    material.color.lerp(endColor, 0.05);
     sprite.render(time, map);
   });
 
   if (canCreateParticle) {
-    createParticle(time, position, rotation);
+    createParticle({ time, position, rotation, distance });
   }
 };
 
