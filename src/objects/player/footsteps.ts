@@ -4,7 +4,6 @@ import { textureLoader } from "../global/texture_loader";
 
 const fadeOutSpeed = 0.6;
 const betweenSteps = 200;
-const removeAfter = 1000;
 const geometry = new PlaneGeometry(0.06, 0.155);
 const left = new MeshBasicMaterial({
   transparent: true,
@@ -36,10 +35,6 @@ const createStep = throttle((position: Vector3, rotation: Euler) => {
   isRight = !isRight;
 
   group.add(newStep);
-
-  setTimeout(() => {
-    group.remove(step);
-  }, removeAfter);
 }, betweenSteps);
 
 type FootstepsRenderArgs = {
@@ -52,6 +47,10 @@ type FootstepsRenderArgs = {
 const render = ({ direction, position, rotation, delta }: FootstepsRenderArgs) => {
   group.children.forEach((step) => {
     step.material.opacity -= fadeOutSpeed * delta;
+
+    if (step.material.opacity <= 0) {
+      group.remove(step);
+    }
   });
 
   if (direction.length()) {
