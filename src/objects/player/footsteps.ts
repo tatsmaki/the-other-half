@@ -2,14 +2,17 @@ import { Euler, Group, Mesh, MeshBasicMaterial, PlaneGeometry, Vector3 } from "t
 import throttle from "lodash.throttle";
 import { textureLoader } from "../global/texture_loader";
 
+const fadeOutSpeed = 0.6;
+const betweenSteps = 200;
+const removeAfter = 1000;
 const geometry = new PlaneGeometry(0.06, 0.155);
 const left = new MeshBasicMaterial({
   transparent: true,
-  map: textureLoader.load("footstep/left.png"),
+  map: textureLoader.load("footsteps/left.png"),
 });
 const right = new MeshBasicMaterial({
   transparent: true,
-  map: textureLoader.load("footstep/right.png"),
+  map: textureLoader.load("footsteps/right.png"),
 });
 const step = new Mesh(geometry, left);
 const group = new Group<never, typeof step>();
@@ -33,15 +36,22 @@ const createStep = throttle((position: Vector3, rotation: Euler) => {
   isRight = !isRight;
 
   group.add(newStep);
-}, 200);
 
-const render = (direction: Vector3, position: Vector3, rotation: Euler) => {
+  setTimeout(() => {
+    group.remove(step);
+  }, removeAfter);
+}, betweenSteps);
+
+type FootstepsRenderArgs = {
+  direction: Vector3;
+  position: Vector3;
+  rotation: Euler;
+  delta: number;
+};
+
+const render = ({ direction, position, rotation, delta }: FootstepsRenderArgs) => {
   group.children.forEach((step) => {
-    step.material.opacity -= 0.01;
-
-    if (step.material.opacity <= 0) {
-      group.remove(step);
-    }
+    step.material.opacity -= fadeOutSpeed * delta;
   });
 
   if (direction.length()) {
@@ -49,4 +59,4 @@ const render = (direction: Vector3, position: Vector3, rotation: Euler) => {
   }
 };
 
-export const footstep = { group, render };
+export const footsteps = { group, render };

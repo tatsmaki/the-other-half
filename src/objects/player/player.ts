@@ -7,7 +7,7 @@ import { sprite } from "./sprite";
 import { keyboardControl } from "../../controls/keyboard";
 import { flame } from "../flame";
 import { directionalLight } from "../global/directional_light";
-import { footstep } from "./footstep";
+import { footsteps } from "./footsteps";
 
 const quaternion = new Quaternion();
 const yAxis = new Vector3(0, 1, 0);
@@ -44,7 +44,12 @@ const render = (time: number, delta: number) => {
     sprite.render({ texture: sprite.idle, time, th: 4, tv: 3 });
   }
 
-  footstep.render(direction, group.position, mesh.rotation);
+  footsteps.render({
+    direction,
+    position: group.position,
+    rotation: mesh.rotation,
+    delta,
+  });
 
   mesh.quaternion.slerp(quaternion, 0.1);
   flame.render(time);
