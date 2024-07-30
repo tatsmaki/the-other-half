@@ -1,22 +1,13 @@
-import { FrontSide, Group, Mesh, MeshBasicMaterial, PlaneGeometry, Vector3 } from "three";
+import { Group, Vector3 } from "three";
 import { mouseControl } from "../../controls/mouse";
 import { createArrow } from "../reusable/arrow";
 import { camera } from "../global/camera";
 import { pointLight } from "./point_light";
-import { textureLoader } from "../global/texture_loader";
 import { particles } from "./particles";
 
 const position = new Vector3();
 // const maxRadius = 0.6;
 const group = new Group();
-const geometry = new PlaneGeometry(0.3, 0.3);
-const texture = textureLoader.load("flame_ball.png");
-const material = new MeshBasicMaterial({
-  side: FrontSide,
-  map: texture,
-  transparent: true,
-});
-const mesh = new Mesh(geometry, material);
 const arrow = createArrow(0.3, 0xffffff);
 
 group.add(arrow.mesh, pointLight);
@@ -47,7 +38,7 @@ const render = (time: number) => {
   particles.render({
     time,
     canCreateParticle: isFlameVisible,
-    position: group.position,
+    position: group.position.clone().add(camera.position),
     rotation: arrow.mesh.rotation,
   });
 };

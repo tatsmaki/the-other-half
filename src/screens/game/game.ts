@@ -5,6 +5,7 @@ import { renderer } from "../../objects/global/renderer";
 import { Mobile } from "../mobile";
 import { collision } from "../../objects/global/collision";
 import Stats from "stats.js";
+import { clock } from "../../objects/global/clock";
 
 export const GameScreen = () => {
   const app = document.getElementById("app")!;
@@ -21,7 +22,9 @@ export const GameScreen = () => {
   const animate = (time: number) => {
     stats.begin();
 
-    player.render(time);
+    const delta = clock.getDelta();
+
+    player.render(time, delta);
     renderer.render(scene, camera);
 
     stats.end();

@@ -8,7 +8,6 @@ import { keyboardControl } from "../../controls/keyboard";
 import { flame } from "../flame";
 import { directionalLight } from "../global/directional_light";
 import { footstep } from "./footstep";
-import { clock } from "../global/clock";
 
 const quaternion = new Quaternion();
 const yAxis = new Vector3(0, 1, 0);
@@ -25,7 +24,7 @@ group.add(mesh, arrow.mesh, flame.group, directionalLight);
 directionalLight.target = group;
 directionalLight.lookAt(group.position);
 
-const render = (time: number) => {
+const render = (time: number, delta: number) => {
   const direction = keyboardControl.direction.normalize();
 
   if (direction.length()) {
@@ -35,7 +34,7 @@ const render = (time: number) => {
     const intersection = raycaster.render(group.position, direction);
 
     if (!intersection || intersection?.distance > 0.2) {
-      const velocity = direction.clone().clampLength(0, runSpeed * clock.getDelta());
+      const velocity = direction.clone().clampLength(0, runSpeed * delta);
 
       group.position.add(velocity);
       camera.position.add(velocity);
