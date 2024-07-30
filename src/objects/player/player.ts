@@ -8,10 +8,11 @@ import { keyboardControl } from "../../controls/keyboard";
 import { flame } from "../flame";
 import { directionalLight } from "../global/directional_light";
 import { footstep } from "./footstep";
+import { clock } from "../global/clock";
 
 const quaternion = new Quaternion();
 const yAxis = new Vector3(0, 1, 0);
-const runSpeed = 0.015;
+const runSpeed = 1.2;
 const group = new Group();
 const geometry = new PlaneGeometry(1.8, 1.8);
 const mesh = new Mesh(geometry, material);
@@ -34,7 +35,7 @@ const render = (time: number) => {
     const intersection = raycaster.render(group.position, direction);
 
     if (!intersection || intersection?.distance > 0.2) {
-      const velocity = direction.clone().clampLength(0, runSpeed);
+      const velocity = direction.clone().clampLength(0, runSpeed * clock.getDelta());
 
       group.position.add(velocity);
       camera.position.add(velocity);
