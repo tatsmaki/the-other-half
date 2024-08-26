@@ -7,11 +7,11 @@ const betweenSteps = 200;
 const geometry = new PlaneGeometry(0.06, 0.155);
 const left = new MeshBasicMaterial({
   transparent: true,
-  map: textureLoader.load("footsteps/left.png"),
+  map: textureLoader.load("/footsteps/left.png"),
 });
 const right = new MeshBasicMaterial({
   transparent: true,
-  map: textureLoader.load("footsteps/right.png"),
+  map: textureLoader.load("/footsteps/right.png"),
 });
 const step = new Mesh(geometry, left);
 const group = new Group<never, typeof step>();

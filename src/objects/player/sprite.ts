@@ -3,14 +3,14 @@ import { RenderSpriteArgs, renderSprite, resetSprite } from "../../utils/sprite"
 import { material } from "./material";
 import { textureLoader } from "../global/texture_loader";
 
-const idle = textureLoader.load("idle.png");
+const idle = textureLoader.load("/player/idle.png");
 
 idle.wrapS = RepeatWrapping;
 idle.wrapT = RepeatWrapping;
 idle.center.x = 0.007;
 idle.center.y = 0.022;
 
-const run = textureLoader.load("run.png");
+const run = textureLoader.load("/player/run.png");
 
 run.wrapS = RepeatWrapping;
 run.wrapT = RepeatWrapping;
