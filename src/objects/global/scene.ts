@@ -3,6 +3,7 @@ import { hemisphereLight } from "./hemisphere_light";
 import { footsteps } from "../player/footsteps";
 import { particles } from "../flame/particles";
 import { textureLoader } from "./texture_loader";
+import { fallingSnow } from "./falling_snow";
 import { createTree } from "../reusable/tree";
 
 export const scene = new Scene();
@@ -19,6 +20,6 @@ const ground = new Mesh(
 
 ground.receiveShadow = true;
 
-scene.add(helper, ground, hemisphereLight, footsteps.group, particles.group);
+scene.add(helper, ground, hemisphereLight, footsteps.group, particles.group, fallingSnow.points);
 
 createTree();

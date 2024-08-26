@@ -6,6 +6,7 @@ import { Mobile } from "../mobile";
 import { collision } from "../../objects/global/collision";
 import Stats from "stats.js";
 import { clock } from "../../objects/global/clock";
+import { fallingSnow } from "../../objects/global/falling_snow";
 
 export const GameScreen = () => {
   const app = document.getElementById("app")!;
@@ -26,6 +27,9 @@ export const GameScreen = () => {
 
     player.render(time, delta);
     renderer.render(scene, camera);
+
+    fallingSnow.points.rotation.y -= 0.001;
+    // fallingSnow.points.position.lerp({ ...camera.position, z: 2 }, 0.1);
 
     stats.end();
   };
