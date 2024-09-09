@@ -22,10 +22,18 @@ const render = (time: number, delta: number) => {
     position.sub(camera.position);
     position.z = 0.01;
     distance = group.position.distanceTo(position);
+
+    // if (!audioControl.sound.isPlaying) {
+    //   audioControl.playSound(audioResources.get("flame.wav")!);
+    // }
   } else {
     position.x = 0;
     position.y = 0;
     distance = 0;
+
+    // if (audioControl.sound.isPlaying) {
+    //   audioControl.sound.stop();
+    // }
   }
 
   const offset = group.position.lerp(position, 0.1);

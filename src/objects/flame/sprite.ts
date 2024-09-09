@@ -1,6 +1,6 @@
 import { RepeatWrapping, Texture } from "three";
 import { renderSprite } from "../../utils/sprite";
-import { textureLoader } from "../global/texture_loader";
+import { textureLoader } from "../global/loader";
 
 const flame = textureLoader.load("/WhiteFlameLick.png");
 

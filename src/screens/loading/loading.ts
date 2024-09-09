@@ -1,3 +1,4 @@
+import { loadAudio, loadingManager } from "../../objects/global/loader";
 import { GameScreen } from "../game/game";
 import classes from "./loading.module.css";
 
@@ -12,7 +13,11 @@ export const LoadingScreen = () => {
   title.textContent = "Please wait";
   screen.append(title);
 
-  setTimeout(() => {
+  // loadingManager.onProgress = (_url, loaded, total) => {
+  //   console.log(loaded, total);
+  // };
+
+  loadingManager.onLoad = () => {
     const ready = document.createElement("span");
     ready.textContent = "Click anywhere to continue";
     screen.append(ready);
@@ -21,5 +26,7 @@ export const LoadingScreen = () => {
       screen.remove();
       GameScreen();
     };
-  }, 1000);
+  };
+
+  loadAudio();
 };

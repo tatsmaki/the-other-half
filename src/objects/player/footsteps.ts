@@ -1,6 +1,6 @@
 import { Euler, Group, Mesh, MeshBasicMaterial, PlaneGeometry, Vector3 } from "three";
 import throttle from "lodash.throttle";
-import { textureLoader } from "../global/texture_loader";
+import { textureLoader } from "../global/loader";
 
 const fadeOutSpeed = 0.6;
 const betweenSteps = 200;

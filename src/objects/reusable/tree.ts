@@ -1,5 +1,5 @@
 import { collision } from "../global/collision";
-import { gltfLoader } from "../global/gltf_loader";
+import { gltfLoader } from "../global/loader";
 import { scene } from "../global/scene";
 import { createBox } from "./box";
 

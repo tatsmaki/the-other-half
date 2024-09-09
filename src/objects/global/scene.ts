@@ -2,7 +2,7 @@ import { AxesHelper, Mesh, MeshLambertMaterial, PlaneGeometry, Scene } from "thr
 import { hemisphereLight } from "./hemisphere_light";
 import { footsteps } from "../player/footsteps";
 import { particles } from "../flame/particles";
-import { textureLoader } from "./texture_loader";
+import { textureLoader } from "./loader";
 import { fallingSnow } from "./falling_snow";
 import { createTree } from "../reusable/tree";
 
