@@ -16,6 +16,7 @@ const group = new Group();
 const geometry = new PlaneGeometry(1.8, 1.8);
 const mesh = new Mesh(geometry, material);
 const arrow = createArrow();
+const velocity = new Vector3();
 
 mesh.position.z = 0.03;
 mesh.castShadow = true;
@@ -34,7 +35,7 @@ const render = (time: number, delta: number) => {
     const intersection = raycaster.render(group.position, direction);
 
     if (!intersection || intersection?.distance > 0.2) {
-      const velocity = direction.clone().clampLength(0, runSpeed * delta);
+      velocity.copy(direction).clampLength(0, runSpeed * delta);
 
       group.position.add(velocity);
       camera.position.add(velocity);

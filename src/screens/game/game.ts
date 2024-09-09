@@ -28,10 +28,8 @@ export const GameScreen = () => {
     const delta = clock.getDelta();
 
     player.render(time, delta);
+    fallingSnow.render();
     renderer.render(scene, camera);
-
-    fallingSnow.points.rotation.y -= 0.001;
-    // fallingSnow.points.position.lerp({ ...camera.position, z: 2 }, 0.1);
 
     stats.end();
   };
