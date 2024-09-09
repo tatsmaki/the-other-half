@@ -1,5 +1,5 @@
 import { BufferGeometry, Float32BufferAttribute, MathUtils, Points, PointsMaterial } from "three";
-import { textureLoader } from "./texture_loader";
+import { textureLoader } from "./loader";
 
 const vertices = [];
 
