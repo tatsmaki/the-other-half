@@ -9,6 +9,8 @@ import { clock } from "../../objects/global/clock";
 import { audioResources } from "../../objects/global/loader";
 import { audioControl } from "../../controls/audio";
 import { fallingSnow } from "../../objects/global/falling_snow";
+import { PauseScreen } from "../pause";
+import { gameControl } from "../../controls/game";
 
 export const GameScreen = () => {
   const app = document.getElementById("app")!;
@@ -49,6 +51,13 @@ export const GameScreen = () => {
       audioControl.playBackground(audioResources.get("blizzard.wav")!);
     } else {
       audioControl.stopBackground();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Escape" && gameControl.isActive) {
+      gameControl.pauseGame();
+      PauseScreen();
     }
   });
 };

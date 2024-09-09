@@ -8,6 +8,7 @@ import { keyboardControl } from "../../controls/keyboard";
 import { flame } from "../flame";
 import { directionalLight } from "../global/directional_light";
 import { footsteps } from "./footsteps";
+import { gameControl } from "../../controls/game";
 
 const quaternion = new Quaternion();
 const yAxis = new Vector3(0, 1, 0);
@@ -28,7 +29,7 @@ directionalLight.lookAt(group.position);
 const render = (time: number, delta: number) => {
   const direction = keyboardControl.direction.normalize();
 
-  if (direction.length()) {
+  if (direction.length() && gameControl.isActive) {
     sprite.render({ texture: sprite.run, time, th: 5, tv: 4 });
     quaternion.setFromUnitVectors(yAxis, direction);
 

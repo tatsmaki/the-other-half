@@ -22,7 +22,8 @@
 
 html {
   height: 100%;
-  /* cursor: url(/cursor.png), default; */
+  cursor: url(/cursor.png), default;
+  user-select: none;
 }
 
 body {

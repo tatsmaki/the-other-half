@@ -1,0 +1,32 @@
+.pause {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a0909cb;
+}
+
+.action {
+  width: 320px;
+  max-width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 70%;
+  font-family: "Cardo", serif;
+  font-size: 24px;
+  cursor: url(/cursor.png), default;
+}
+
+.action:hover,
+.action:focus {
+  background: radial-gradient(#cb4a33db, transparent 70%);
+}
+
+.action:disabled {
+  background: none;
+}

@@ -4,6 +4,7 @@ import { createArrow } from "../reusable/arrow";
 import { camera } from "../global/camera";
 import { pointLight } from "./point_light";
 import { particles } from "./particles";
+import { gameControl } from "../../controls/game";
 
 const position = new Vector3();
 let distance = 0;
@@ -14,7 +15,7 @@ const arrow = createArrow(0.3, 0xffffff);
 group.add(arrow.mesh, pointLight);
 
 const render = (time: number, delta: number) => {
-  if (mouseControl.isActive) {
+  if (mouseControl.isActive && gameControl.isActive) {
     const projection = mouseControl.projection;
 
     position.copy(projection.unproject(camera));
