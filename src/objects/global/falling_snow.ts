@@ -46,9 +46,11 @@ const material = new PointsMaterial({
 });
 const points = new Points(geometry, material);
 const zOffset = 2.3;
+const zAxis = new Vector3(0, 0, 1);
 const ySpeed = -0.001;
 
 points.position.z = zOffset;
+points.rotateOnAxis(zAxis, -Math.PI / 4);
 
 const vertex = new Vector3();
 const yAxis = new Vector3(0, 1, 0);
