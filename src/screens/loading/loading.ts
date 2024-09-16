@@ -4,23 +4,25 @@ import classes from "./loading.module.css";
 
 export const LoadingScreen = () => {
   const app = document.getElementById("app")!;
-
   const screen = document.createElement("div");
+  const title = document.createElement("h1");
+  const ready = document.createElement("span");
+
   screen.className = classes.loading;
   app.append(screen);
 
-  const title = document.createElement("h1");
   title.textContent = "Please wait";
-  screen.append(title);
+  ready.textContent = "0 %";
+  screen.append(title, ready);
 
-  // loadingManager.onProgress = (_url, loaded, total) => {
-  //   console.log(loaded, total);
-  // };
+  loadingManager.onProgress = (_url, loaded, total) => {
+    const progress = (loaded / total) * 100;
+
+    ready.textContent = `${progress.toFixed()} %`;
+  };
 
   loadingManager.onLoad = () => {
-    const ready = document.createElement("span");
     ready.textContent = "Click anywhere to continue";
-    screen.append(ready);
 
     screen.onclick = () => {
       screen.remove();
