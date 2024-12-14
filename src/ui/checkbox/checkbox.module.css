@@ -1,0 +1,45 @@
+.checkbox {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 150px 1fr 90px;
+  justify-items: start;
+  gap: 16px;
+  width: 90%;
+  max-width: 720px;
+}
+
+.label {
+  font-family: "Cardo", serif;
+  font-size: 24px;
+  cursor: url(/cursor.png), default;
+  user-select: none;
+}
+
+.input {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: url(/cursor.png), default;
+  background: var(--colors-black-900);
+}
+
+.input:hover {
+  /* background: black; */
+}
+
+.input::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  clip-path: polygon(80% 0, 100% 20%, 20% 100%, 0 80%);
+  transform: scale(0);
+  background: var(--colors-accent-300);
+}
+
+.input:checked::before {
+  transform: scale(1);
+}

@@ -1,0 +1,19 @@
+.action {
+  width: 320px;
+  max-width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: "Cardo", serif;
+  font-size: 24px;
+  cursor: url(/cursor.png), default;
+}
+
+.action:hover,
+.action:focus {
+  background: radial-gradient(#cb4a33db, transparent 70%);
+}
+
+.action:disabled {
+  background: none;
+}

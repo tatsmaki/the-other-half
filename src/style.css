@@ -9,7 +9,10 @@
   font-weight: 400;
 
   --colors-black-100: #fafafa;
+  --colors-black-400: #2a2a2a;
   --colors-black-500: #242424;
+  --colors-black-900: #030303;
+  --colors-accent-300: #af4327;
   color-scheme: light dark;
   color: var(--colors-black-100);
   background-color: var(--colors-black-500);

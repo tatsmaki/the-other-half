@@ -11,6 +11,8 @@ import { audioControl } from "../../controls/audio";
 import { fallingSnow } from "../../objects/global/falling_snow";
 import { PauseScreen } from "../pause";
 import { gameControl } from "../../controls/game";
+// import { enemy } from "../../objects/enemy/enemy";
+// import { enemies } from "../../objects/global/enemies";
 
 export const GameScreen = () => {
   const app = document.getElementById("app")!;
@@ -18,7 +20,12 @@ export const GameScreen = () => {
   Mobile();
   app.append(renderer.domElement);
 
-  scene.add(player.group, collision.group);
+  // enemies.group.add(enemy.group);
+  scene.add(
+    player.group,
+    collision.group
+    //  enemy.group
+  );
 
   const stats = new Stats();
   stats.showPanel(0);
@@ -31,6 +38,7 @@ export const GameScreen = () => {
 
     player.render(time, delta);
     fallingSnow.render();
+    // enemy.render(delta);
     renderer.render(scene, camera);
 
     stats.end();
@@ -47,17 +55,28 @@ export const GameScreen = () => {
   };
 
   document.addEventListener("visibilitychange", () => {
+    if (!gameControl.isActive) {
+      return;
+    }
+
     if (document.visibilityState === "visible") {
       audioControl.playBackground(audioResources.get("blizzard.wav")!);
-    } else {
-      audioControl.stopBackground();
+
+      return;
     }
+
+    audioControl.stopBackground();
   });
+
+  const pauseGame = () => {
+    gameControl.pauseGame();
+    audioControl.stopBackground();
+    PauseScreen();
+  };
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "Escape" && gameControl.isActive) {
-      gameControl.pauseGame();
-      PauseScreen();
+      pauseGame();
     }
   });
 };
