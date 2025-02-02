@@ -5,12 +5,16 @@ import { camera } from "../global/camera";
 import { pointLight } from "./point_light";
 import { particles } from "./particles";
 import { gameControl } from "../../controls/game";
+import { raycaster } from "./raycaster";
+import { player } from "../player";
+import { enemy } from "../enemy/enemy";
 
 const position = new Vector3();
 let distance = 0;
 // const maxRadius = 0.6;
 const group = new Group();
 const arrow = createArrow(0.3, 0xffffff);
+const zAxis = new Vector3(0, 0, 1);
 
 group.add(arrow.mesh, pointLight);
 
@@ -45,7 +49,15 @@ const render = (time: number, delta: number) => {
   pointLight.intensity = lightIntensity;
   group.visible = isFlameVisible;
 
-  arrow.render(position.clone().sub(group.position).normalize());
+  const direction = position.clone().sub(group.position).normalize();
+
+  arrow.render(direction);
+
+  // const origin = player.group.position.clone().add(group.position);
+  // console.log(origin);
+  // const intersection = raycaster.render(origin, zAxis);
+  // console.log(origin.distanceTo(enemy.group.position));
+  // console.log(intersection?.distance);
 
   particles.render({
     time,

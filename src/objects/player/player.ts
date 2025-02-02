@@ -9,6 +9,7 @@ import { flame } from "../flame";
 import { directionalLight } from "../global/directional_light";
 import { footsteps } from "./footsteps";
 import { gameControl } from "../../controls/game";
+import { joystickControl } from "../../screens/mobile/mobile";
 
 const quaternion = new Quaternion();
 const yAxis = new Vector3(0, 1, 0);
@@ -27,7 +28,9 @@ directionalLight.target = group;
 directionalLight.lookAt(group.position);
 
 const render = (time: number, delta: number) => {
-  const direction = keyboardControl.direction.normalize();
+  const keyboardDirection = keyboardControl.direction.normalize();
+  const joystickDirection = new Vector3(...joystickControl.direction.normalize(), 0);
+  const direction = keyboardDirection.add(joystickDirection);
 
   if (direction.length() && gameControl.isActive) {
     sprite.render({ texture: sprite.run, time, th: 5, tv: 4 });

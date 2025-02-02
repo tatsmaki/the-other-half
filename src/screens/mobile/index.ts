@@ -1,1 +1,1 @@
-export { Mobile } from "./mobile";
+export { MobileScreen } from "./mobile";
