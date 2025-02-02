@@ -1,5 +1,4 @@
 import { Raycaster, Vector3 } from "three";
-import { enemies } from "../global/enemies";
 import { enemy } from "../enemy/enemy";
 
 const ray = new Raycaster();
