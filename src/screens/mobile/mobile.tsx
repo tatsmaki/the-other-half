@@ -1,7 +1,8 @@
-import { createJoystick } from "../joystick";
 import { RotateDevice } from "../rotate_device";
 import { createMediaQuery } from "@solid-primitives/media";
 import { MobileScreenProps } from "./mobile.types";
+import { createJoystick } from "joystick-ui";
+import "joystick-ui/dist/main.css";
 
 const { joystick, joystickControl } = createJoystick();
 
