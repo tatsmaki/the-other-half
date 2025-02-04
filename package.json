@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@solid-primitives/media": "^2.2.10",
-    "joystick-ui": "^1.0.15",
+    "joystick-ui": "^1.0.16",
     "lodash.throttle": "^4.1.1",
     "solid-js": "^1.9.4",
     "stats.js": "^0.17.0",
