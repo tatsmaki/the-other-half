@@ -1,12 +1,11 @@
 import { Audio, AudioListener } from "three";
 import { camera } from "../objects/global/camera";
+import { settingsControl } from "./settings";
 
 class AudioControl {
   private listener: AudioListener;
   background: Audio;
-  backgroundVolume = 0.1;
   sound: Audio;
-  soundVolume = 0.2;
 
   constructor() {
     this.listener = new AudioListener();
@@ -20,11 +19,11 @@ class AudioControl {
     this.background.setBuffer(buffer);
     this.background.setLoop(true);
     this.background.play();
-    this.background.fadeIn(this.backgroundVolume);
+    this.background.fadeIn(settingsControl.settings.backgroundVolume);
   }
 
   stopBackground() {
-    this.background.fadeOut(this.backgroundVolume);
+    this.background.fadeOut(settingsControl.settings.backgroundVolume);
 
     if (this.background.source) {
       const { currentTime } = this.listener.context;
@@ -38,7 +37,7 @@ class AudioControl {
   playSound(buffer: AudioBuffer) {
     this.sound.setBuffer(buffer);
     this.sound.setLoop(true);
-    this.sound.setVolume(this.soundVolume);
+    this.sound.setVolume(settingsControl.settings.soundVolume);
     this.sound.play();
   }
 }

@@ -16,6 +16,8 @@ import { GameProps } from "./game.types";
 
 const stats = new Stats();
 stats.showPanel(0);
+stats.dom.style.left = "";
+stats.dom.style.right = "0";
 
 const animate = (time: number) => {
   stats.begin();
@@ -49,16 +51,10 @@ const onVisibilityChange = () => {
 };
 
 export const GameScreen = (props: GameProps) => {
-  const pauseGame = () => {
-    gameControl.pauseGame();
-    audioControl.stopBackground();
-    props.onPause();
-  };
-
   createEffect(() => {
     const onKeydown = (event: KeyboardEvent) => {
       if (event.code === "Escape" && gameControl.isActive) {
-        pauseGame();
+        props.onPause();
       }
     };
 

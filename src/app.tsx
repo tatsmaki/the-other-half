@@ -4,11 +4,29 @@ import { GameScreen } from "./screens/game";
 import { PauseScreen } from "./screens/pause";
 import { SettingsScreen } from "./screens/settings";
 import { MobileScreen } from "./screens/mobile";
+import { gameControl } from "./controls/game";
+import { audioControl } from "./controls/audio";
+import { checkFullscreen } from "./utils/check_fullscreen";
 
 export const App = () => {
   const [isLoading, setIsLoading] = createSignal(true);
   const [isPause, setIsPause] = createSignal(false);
   const [isSettings, setIsSettings] = createSignal(false);
+
+  const startGame = () => {
+    setIsLoading(false);
+    checkFullscreen();
+  };
+
+  const pauseGame = () => {
+    setIsPause(true);
+    gameControl.pauseGame();
+    audioControl.stopBackground();
+  };
+
+  const resumeGame = () => {
+    setIsPause(false);
+  };
 
   const closeSettings = () => {
     setIsSettings(false);
@@ -22,13 +40,13 @@ export const App = () => {
 
   return (
     <>
-      {isLoading() && <LoadingScreen onLoad={() => setIsLoading(false)} />}
-      {!isLoading() && <GameScreen onPause={() => setIsPause(true)} />}
+      {isLoading() && <LoadingScreen onLoad={startGame} />}
+      {!isLoading() && <GameScreen onPause={pauseGame} />}
 
-      {isPause() && <PauseScreen onResume={() => setIsPause(false)} onSettings={openSettings} />}
+      {isPause() && <PauseScreen onResume={resumeGame} onSettings={openSettings} />}
       {isSettings() && <SettingsScreen onClose={closeSettings} />}
 
-      <MobileScreen isLoading={isLoading} />
+      <MobileScreen isLoading={isLoading} onPause={pauseGame} />
     </>
   );
 };
