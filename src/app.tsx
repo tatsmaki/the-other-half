@@ -6,7 +6,6 @@ import { SettingsScreen } from "./screens/settings";
 import { MobileScreen } from "./screens/mobile";
 import { gameControl } from "./controls/game";
 import { audioControl } from "./controls/audio";
-import { checkFullscreen } from "./utils/check_fullscreen";
 
 export const App = () => {
   const [isLoading, setIsLoading] = createSignal(true);
@@ -15,7 +14,6 @@ export const App = () => {
 
   const startGame = () => {
     setIsLoading(false);
-    checkFullscreen();
   };
 
   const pauseGame = () => {

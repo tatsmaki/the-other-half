@@ -7,7 +7,7 @@ type Settings = {
 const defaultSettings: Settings = {
   backgroundVolume: 0.1,
   soundVolume: 0.2,
-  fullScreen: true,
+  fullScreen: false,
 };
 
 class SettingsControl {
