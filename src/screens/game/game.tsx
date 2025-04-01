@@ -9,7 +9,7 @@ import { audioResources } from "../../objects/global/loader";
 import { audioControl } from "../../controls/audio";
 import { fallingSnow } from "../../objects/global/falling_snow";
 import { gameControl } from "../../controls/game";
-import { createEffect } from "solid-js";
+import { createEffect, onCleanup } from "solid-js";
 import { GameProps } from "./game.types";
 // import { enemy } from "../../objects/enemy/enemy";
 // import { enemies } from "../../objects/global/enemies";
@@ -65,15 +65,19 @@ export const GameScreen = (props: GameProps) => {
       //  enemy.group
     );
 
+    onResize();
     renderer.setAnimationLoop(animate);
-
     audioControl.playBackground(audioResources.get("blizzard.wav")!);
 
-    window.onresize = onResize;
-
+    window.addEventListener("resize", onResize);
     document.addEventListener("visibilitychange", onVisibilityChange);
-
     document.addEventListener("keydown", onKeydown);
+
+    onCleanup(() => {
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      document.removeEventListener("keydown", onKeydown);
+    });
   });
 
   return (
