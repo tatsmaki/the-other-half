@@ -12,6 +12,9 @@ class AudioControl {
     this.background = new Audio(this.listener);
     this.sound = new Audio(this.listener);
 
+    // @ts-expect-error safari audio session
+    Object.assign(navigator.audioSession || {}, { type: "playback" });
+
     camera.add(this.listener);
   }
 
