@@ -11,13 +11,15 @@ import { fallingSnow } from "../../objects/global/falling_snow";
 import { gameControl } from "../../controls/game";
 import { createEffect, onCleanup } from "solid-js";
 import { GameProps } from "./game.types";
-// import { enemy } from "../../objects/enemy/enemy";
-// import { enemies } from "../../objects/global/enemies";
+import { snow } from "../../objects/global/map/snow";
 
 const stats = new Stats();
 stats.showPanel(0);
 stats.dom.style.left = "";
 stats.dom.style.right = "0";
+
+// enemies.group.add(enemy.group);
+scene.add(player.group, collision.group, snow.mesh);
 
 const animate = (time: number) => {
   stats.begin();
@@ -57,13 +59,6 @@ export const GameScreen = (props: GameProps) => {
         props.onPause();
       }
     };
-
-    // enemies.group.add(enemy.group);
-    scene.add(
-      player.group,
-      collision.group
-      //  enemy.group
-    );
 
     onResize();
     renderer.setAnimationLoop(animate);

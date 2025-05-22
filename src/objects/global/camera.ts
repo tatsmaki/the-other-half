@@ -1,8 +1,11 @@
 import { PerspectiveCamera } from "three";
 
 const aspect = window.innerWidth / window.innerHeight;
-const camera = new PerspectiveCamera(70, aspect, 0.01, 2);
+const fov = 70;
+const near = 0.01;
+const far = 2;
+const camera = new PerspectiveCamera(fov, aspect, near, far + 0.01);
 
-camera.position.z = 2;
+camera.position.z = far;
 
 export { camera };
