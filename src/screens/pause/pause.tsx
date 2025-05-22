@@ -9,7 +9,7 @@ import { PauseProps } from "./pause.types";
 export const PauseScreen = (props: PauseProps) => {
   const resumeGame = () => {
     props.onResume();
-    audioControl.playBackground(audioResources.get("blizzard.wav")!);
+    audioControl.playBackground(audioResources.get("blizzard")!);
     gameControl.resumeGame();
   };
 

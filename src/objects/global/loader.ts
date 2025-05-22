@@ -8,11 +8,11 @@ export const audioResources = new Map<string, AudioBuffer>();
 export const audioLoader = new AudioLoader(loadingManager);
 
 export const loadAudio = () => {
-  audioLoader.load("/audio/blizzard.wav", (buffer) => {
-    audioResources.set("blizzard.wav", buffer);
+  audioLoader.load("/audio/blizzard.mp3", (buffer) => {
+    audioResources.set("blizzard", buffer);
   });
-  audioLoader.load("/audio/flame.wav", (buffer) => {
-    audioResources.set("flame.wav", buffer);
+  audioLoader.load("/audio/flame.mp3", (buffer) => {
+    audioResources.set("flame", buffer);
   });
 };
 

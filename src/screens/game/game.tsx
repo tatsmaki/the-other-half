@@ -2,7 +2,6 @@ import { player } from "../../objects/player";
 import { scene } from "../../objects/global/scene";
 import { camera } from "../../objects/global/camera";
 import { renderer } from "../../objects/global/renderer";
-import { collision } from "../../objects/global/collision";
 import Stats from "stats.js";
 import { clock } from "../../objects/global/clock";
 import { audioResources } from "../../objects/global/loader";
@@ -11,7 +10,6 @@ import { fallingSnow } from "../../objects/global/falling_snow";
 import { gameControl } from "../../controls/game";
 import { createEffect, onCleanup } from "solid-js";
 import { GameProps } from "./game.types";
-import { snow } from "../../objects/global/map/snow";
 
 const stats = new Stats();
 stats.showPanel(0);
@@ -19,7 +17,6 @@ stats.dom.style.left = "";
 stats.dom.style.right = "0";
 
 // enemies.group.add(enemy.group);
-scene.add(player.group, collision.group, snow.mesh);
 
 const animate = (time: number) => {
   stats.begin();
@@ -46,7 +43,7 @@ const onVisibilityChange = () => {
   }
 
   if (document.visibilityState === "visible") {
-    return audioControl.playBackground(audioResources.get("blizzard.wav")!);
+    return audioControl.playBackground(audioResources.get("blizzard")!);
   }
 
   audioControl.stopBackground();
@@ -62,7 +59,7 @@ export const GameScreen = (props: GameProps) => {
 
     onResize();
     renderer.setAnimationLoop(animate);
-    audioControl.playBackground(audioResources.get("blizzard.wav")!);
+    audioControl.playBackground(audioResources.get("blizzard")!);
 
     window.addEventListener("resize", onResize);
     document.addEventListener("visibilitychange", onVisibilityChange);

@@ -7,6 +7,7 @@ const material = new MeshBasicMaterial({
   precision: "highp",
   alphaTest: 0.5,
   shadowSide: FrontSide,
+  fog: false,
 });
 
 export { material };

@@ -10,6 +10,7 @@ import { directionalLight } from "../global/directional_light";
 import { footsteps } from "./footsteps";
 import { gameControl } from "../../controls/game";
 import { joystickControl } from "../../screens/mobile/mobile";
+import { spotLight } from "../global/spot_light";
 
 const quaternion = new Quaternion();
 const yAxis = new Vector3(0, 1, 0);
@@ -23,9 +24,11 @@ const velocity = new Vector3();
 mesh.position.z = 0.03;
 mesh.castShadow = true;
 
-group.add(mesh, arrow.mesh, flame.group, directionalLight);
+group.add(mesh, arrow.mesh, flame.group, directionalLight, spotLight);
 directionalLight.target = group;
 directionalLight.lookAt(group.position);
+spotLight.target = group;
+spotLight.lookAt(group.position);
 
 const render = (time: number, delta: number) => {
   const keyboardDirection = keyboardControl.direction.normalize();
