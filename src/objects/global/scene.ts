@@ -1,4 +1,4 @@
-import { AxesHelper, Color, FogExp2, Scene } from "three";
+import { Color, FogExp2, GridHelper, Scene } from "three";
 import { footsteps } from "../player/footsteps";
 import { particles } from "../flame/particles";
 import { fallingSnow } from "./falling_snow";
@@ -13,11 +13,12 @@ export const scene = new Scene();
 scene.background = new Color(0xffffff);
 scene.fog = new FogExp2(0xffffff, 0.3);
 
-const helper = new AxesHelper(1);
+const gridHelper = new GridHelper(10, 10);
 
-helper.position.z = 0.001;
+gridHelper.position.z = 0.001;
+gridHelper.rotation.x = Math.PI / 2;
 
-scene.add(helper, footsteps.group, particles.group, fallingSnow.points, ambientLight);
+scene.add(gridHelper, footsteps.group, particles.group, fallingSnow.points, ambientLight);
 
 scene.add(player.group, collision.group, snow.mesh);
 
