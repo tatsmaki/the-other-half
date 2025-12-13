@@ -6,8 +6,8 @@ declare module "three" {
   }
 
   export interface Audio {
-    fadeIn(volume: number, duration?: number): void;
+    fadeIn(duration: number, volumeNow?: number, volumeThen?: number): void;
 
-    fadeOut(volume: number, duration?: number): void;
+    fadeOut(duration: number, volumeThen?: number): void;
   }
 }
